@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
-import App from 'src/client/App';
+import App            from 'src/client/App';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class AppService {
-  app: App | undefined;
+	app: App | undefined;
 
-  constructor() { console.log("construct app.service"); }
+	constructor() {
+		console.log('construct app.service');
+	}
 
-  getAppInstance() {
-    if (this.app === undefined) {
-      this.app = new App();
-      this.app.init();
-    }
-    return this.app;
-  }
+	getAppInstance() {
+		if (this.app === undefined) {
+			this.app = new App();
+			this.app.init();
+		}
+		return this.app;
+	}
 
 }
