@@ -1,6 +1,6 @@
-import AppState from './AppState';
-import Module from './modules/Module';
-import TrendModule from 'src/client/modules/TrendModule';
+import AppState        from './AppState';
+import Module          from './modules/Module';
+import TrendModule     from 'src/client/modules/TrendModule';
 import AppDataProvider from './AppDataProvider';
 
 // Encapsulates entire application state and functionality
@@ -8,42 +8,47 @@ const DEFAULT_TICK = 5000;
 
 export default class App {
 
-    appState: AppState;
+	appState: AppState;
 
-    modules: Array<Module>;
+	modules: Array<Module>;
 
-    dataProvider: AppDataProvider;
+	dataProvider: AppDataProvider;
 
-    constructor() {
-        console.log('new App');
-        this.appState = new AppState();
-        this.modules = new Array<Module>();
-        this.dataProvider = new AppDataProvider();
-    }
+	constructor() {
+		console.log('new App');
+		this.appState = new AppState();
+		this.loadModules();
+		this.init();
+	}
 
-    init() {
-        const self = this;
-        // Todo: do this elsewhere
-        this.registerModule(new TrendModule());
+	loadModules() {
+		this.modules = new Array<Module>();
+		this.registerModule(new TrendModule());
+	}
 
-        this.dataProvider.getData().subscribe(data => {
-            console.log('DATA UPDATE', data);
-            self.onTick(data, DEFAULT_TICK);
-        });
-    }
+	init() {
+		const self = this;
 
-    registerModule(module) {
-        this.modules.push(module);
-    }
+		// Todo: do this elsewhere
+		this.dataProvider = new AppDataProvider();
 
-    // passes changes to each module
-    onTick(newData, interval: number) {
-        console.log('App tick', newData);
+		this.dataProvider.getData().subscribe(data => {
+			console.log('DATA UPDATE', data);
+			self.onTick(data, DEFAULT_TICK);
+		});
+	}
 
-        this.modules.forEach(m => {
-            m.onTick(newData, interval);
-        });
+	registerModule(module) {
+		this.modules.push(module);
+	}
 
-    }
+	// passes changes to each module
+	onTick(d: number, newData, allData?) {
+		console.log('App tick', newData);
+		this.modules.forEach(m => {
+			m.onTick(d, newData, allData);
+		});
+
+	}
 
 }

@@ -2,17 +2,17 @@ import Module from './Module';
 
 export default class TrendModule extends Module {
 
-    constructor() {
-        super();
-        // init trends...
-    }
+	constructor() {
+		super();
+		// init trends...
+	}
 
-    onInit() {
-        console.log('Trend module init...');
-    }
+	onInit() {
+		console.log('Trend module init...');
+	}
 
-    onTick(newData, interval: number) {
-        console.log('Trend module tick...');
-    }
+	onTick(d: number, newData, allData) {
+		console.log('Trend module tick...');
+	}
 
 }

@@ -5,12 +5,14 @@ import { AppComponent }            from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent }      from './dashboard/dashboard.component';
 import { NotFoundComponent }       from './not-found/not-found.component';
+import { ChartComponent } from './dashboard/chart/chart.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		DashboardComponent,
-		NotFoundComponent
+		NotFoundComponent,
+		ChartComponent
 	],
 	imports: [
 		BrowserModule,
