@@ -1,0 +1,60 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./src",
+        "outDir": "./dist",
+        "module": "commonjs",
+        "declaration": true,
+        "removeComments": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "target": "es2020",
+        "sourceMap": true,
+        "incremental": true,
+        "paths": {
+            //"app/*":        ["./*"],
+            //"src/*":        ["./*"],
+            //"api/*":        ["./*"],
+            "lib/*": [
+                "lib/*"
+            ],
+            "models/*": [
+                "lib/models/*"
+            ],
+            "services/*": [
+                "lib/services/*"
+            ],
+            "modules/*": [
+                "modules/*"
+            ],
+            "utils/*": [
+                "utils/*"
+            ],
+            "exceptions/*": [
+                "exceptions/*"
+            ],
+            "filters/*": [
+                "filters/*"
+            ],
+            "scripts/*": [
+                "../scripts/*"
+            ]
+        },
+        // "watch": true,
+        // "watchAssets": true,
+        // "assets": ["./**/*.js", "./**.*.ts", "./**/.env.local", "../.env.local", "./.env.local"]
+    },
+    "ts-node": {
+        "require": [
+            "tsconfig-paths/register"
+        ]
+    },
+    "include": [
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.js",
+        "**/*.jsx",
+        "../scripts",
+        "src"
+    ]
+}

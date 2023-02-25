@@ -1,0 +1,86 @@
+{
+    "compilerOptions": {
+        "strict": false,
+        "baseUrl": "./src",
+        "outDir": "./build", // path to output directory
+        "target": "ESNext",
+        "jsx": "react",
+        "allowJs": true,
+        "moduleResolution": "NodeNext",
+        "strictNullChecks": true, // enable strict null checks as a best practice
+        "noImplicitThis": true,
+        "noImplicitReturns": false,
+        "noImplicitAny": false,
+        "noUnusedLocals": true,
+        "noUnusedParameters": false,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "declaration": true,
+        "skipLibCheck": false,
+        "sourceMap": true, // allow sourcemap support
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "paths": {
+            "app/*": [
+                "./*"
+            ],
+            "src/*": [
+                "./*"
+            ],
+            "components/*": [
+                "components/*"
+            ],
+            "pages/*": [
+                "components/pages/*"
+            ],
+            "lib/*": [
+                "lib/*"
+            ],
+            "utils/*": [
+                "utils/*"
+            ],
+            "services/*": [
+                "services/*"
+            ],
+            "helpers/*": [
+                "lib/helpers/*"
+            ],
+            "data/*": [
+                "lib/data/*"
+            ],
+            "providers/*": [
+                "lib/data/providers/*"
+            ],
+            "stores/*": [
+                "lib/data/stores/*"
+            ],
+            "models/*": [
+                "lib/models/*"
+            ],
+            "styles/*": [
+                "./styles/*"
+            ],
+            "static/*": [
+                "../static/*"
+            ],
+            "shared/*": [
+                "../../shared/*"
+            ],
+            "admin/*": [
+                "admin/*"
+            ]
+        }
+    },
+    "include": [
+        "./**/*",
+        "../../shared/**/*",
+        "../static/**/*"
+    ],
+    "exclude": [
+        "../node_modules/**/*",
+        "../build/*"
+    ]
+}

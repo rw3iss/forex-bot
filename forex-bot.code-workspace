@@ -1,0 +1,25 @@
+{
+    "folders": [
+        {
+            "path": "./docs",
+            "name": "docs"
+        },
+        {
+            "path": "./api",
+            "name": "api"
+        },
+        {
+            "path": "./web",
+            "name": "web"
+        },
+        {
+            "path": "./bot",
+            "name": "bot"
+        },
+        {
+            "path": "./scripts",
+            "name": "scripts"
+        }
+    ],
+    "settings": {}
+}

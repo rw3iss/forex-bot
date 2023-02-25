@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/components/Page/style.scss", "../src/components/App/style.scss"],
+  "sourcesContent": [".chart-page {\n    height: 100%;\n    width: 100%;\n    margin: 0;\n    padding: 0;\n    display: flex;\n    flex-direction: column;\n    flex: 1 0 100%;\n}\n\n.tradingview-widget-container {\n    height: 100%;\n    width: 100%;\n    margin: 0;\n    padding: 0;\n    display: flex;\n    flex-direction: column;\n    flex: 1 0 100%;\n}\n\n.tradingview-widget-container > div {\n    height: 100%;\n    width: 100%;\n    margin: 0;\n    padding: 0;\n    display: flex;\n    flex-direction: column;\n    flex: 1 0 100%;\n}\n", "html,\nbody {\n    height: 100%;\n    width: 100%;\n    margin: 0;\n    padding: 0;\n    display: flex;\n    flex-direction: column;\n    flex: 1 0 100%;\n}\n\n#app,\n.app-container {\n    height: 100%;\n    width: 100%;\n    margin: 0;\n    padding: 0;\n    display: flex;\n    flex-direction: column;\n    flex: 1 0 100%;\n}\n"],
+  "mappings": "AAAA,0CACI,YACA,WAFJ,mBAKI,aACA,sBACA,cAaJ,kCACI,YACA,WAtBJ,mBAyBI,aACA,sBACA,cC3BJ,8BAEI,YACA,WAHJ,mBAMI,aACA,sBACA",
+  "names": []
+}
