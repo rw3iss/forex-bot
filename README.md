@@ -18,14 +18,14 @@ In the terminal, split it into two vertical panes, then run in each:
 ```
 cd web
 npm install
-dev
+npm run dev
 ```
 
 ## node backend server api:
 ```
 cd api
 npm install
-dev
+npm run dev
 ```
 
 Open your browser to http://localhost:3000 and you should see the TradingView chart.
