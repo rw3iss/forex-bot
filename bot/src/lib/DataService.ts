@@ -1,97 +1,73 @@
-import mongoose from 'mongoose';
-import ForexData from "./ForexData";
 
-const DB_CONNECTION_STRING = 'mongodb://localhost/forexdata';
-export const DATE_FORMAT_STR = "YYYY-MM-DD HH:mm";
+const request = require('request');
+const cheerio = require('cheerio');
+const fs = require("fs");
+const path = require('path');
 
-class DataService {
+const DATA_URL = 'https://finance.yahoo.com/currencies/';
+const DATA_FILE = path.resolve('../data/data.json');
+
+export default class DataService {
+
+    private data;
 
     constructor() {
+        let folder = path.dirname(DATA_FILE);
+        if (!fs.existsSync(folder)) {
+            fs.mkdirSync(folder, { recursive: true });
+        }
     }
 
-    public async connect() {
-        return new Promise(async (resolve, reject) => {
-            try {
-                console.log(`Connecting to DB: ${DB_CONNECTION_STRING}`);
-                await mongoose.connect(DB_CONNECTION_STRING);
-                console.log(`DataService connected: ${DB_CONNECTION_STRING}`)
-                return resolve(true);
-            } catch (e) {
-                reject(e);
-            }
+    public pollData = () => {
+        return new Promise((resolve, reject) => {
+            request(DATA_URL, (error, response, html) => {
+                if (!error && response.statusCode == 200) {
+                    const $ = cheerio.load(html);
+                    const tableRows = $('table tr');
+                    tableRows.each((i, row) => {
+                        const symbol = $(row).find('td:nth-child(2)').text();
+                        const price = $(row).find('td:nth-child(3)').text();
+                        if (symbol && price) {
+                            const time = Date.now();
+                            const r = {
+                                symbol,
+                                price,
+                                time
+                            };
+                            resolve(r);
+                        }
+                    });
+                } else {
+                    return reject(error);
+                }
+            });
         });
-
     }
 
-    public async saveData(data) {
-        try {
-            const result = await ForexData.bulkWrite(
-                data.map(item => ({
-                    updateOne: {
-                        filter: { time: item.time, symbol: item.symbol },
-                        update: item,
-                        upsert: true
-                    }
-                }))
-            );
-            console.log(`Saved ${result.nModified} out of ${data.length} data points.`);
-        } catch (error) {
-            console.error(error);
-        }
+    public saveData = async (d) => {
+        console.log(`save.`)
+        fs.writeFileSync(DATA_FILE, JSON.stringify(d), { encoding: 'utf8', flag: 'w' }, (err) => {
+            console.log(`Error saving data:`, err);
+        });
     }
 
-    // Method to save dataRows to the mongoose ForexData table
-    public async saveDataRowsToDB(dataRows) {
+    public loadData = () => {
         try {
-            // Find if there are existing data for the same time
-            const existingData = await ForexData.find({ time: { $in: dataRows.map(data => data.time) } });
-            const existingDataMap = existingData.reduce((map, data) => {
-                map[data.time.toISOString()] = data;
-                return map;
-            }, {});
-            const newDataRows = dataRows.filter(data => !existingDataMap[data.time.toISOString()]);
-            const updatedDataRows = dataRows.map(data => {
-                if (existingDataMap[data.time.toISOString()]) {
-                    return { ...existingDataMap[data.time.toISOString()]._doc, ...data };
-                }
+            console.log(`loadData`)
+            if (fs.existsSync(DATA_FILE)) {
+                console.log(`loading...`)
+                const data = JSON.parse(fs.readFileSync(DATA_FILE));
+                console.log(`data`, data)
+                // if (data.currencyData) currencyData = data.currencyData;
+                // if (data.slopeTrends) slopeTrends = data.slopeTrends;
+                // if (data.supportRegions) supportRegions = data.supportRegions;
+                this.data = data;
                 return data;
-            });
-            // Save new data rows and update existing data
-            if (newDataRows.length) {
-                await ForexData.insertMany(newDataRows);
+            } else {
+                console.log(`File doesn't exist: ${DATA_FILE}`);
             }
-            if (updatedDataRows.length) {
-                await ForexData.updateMany({ time: { $in: updatedDataRows.map(data => data.time) } }, { $set: updatedDataRows });
-            }
-        } catch (error) {
-            console.error(error);
+        } catch (err) {
+            console.log(`Error loading previous data:`, err)
         }
     }
-
-    // Method to check for missing minutes between start and end date
-    public async checkMissingMinutes(symbol, startDate, endDate) {
-        try {
-            const forexData = await ForexData.find({
-                symbol,
-                time: { $gte: startDate, $lte: endDate }
-            });
-            const forexDataMap = forexData.reduce((map, data) => {
-                map[data.time.toISOString()] = data;
-                return map;
-            }, {});
-            let missingMinutes = [];
-            for (let date = new Date(startDate.getTime()); date <= endDate; date.setMinutes(date.getMinutes() + 1)) {
-                if (!forexDataMap[date.toISOString()]) {
-                    missingMinutes.push(date.toISOString());
-                }
-            }
-            return missingMinutes;
-        } catch (error) {
-            console.error(error);
-            return [];
-        }
-    }
-
 }
-
-export default new DataService();

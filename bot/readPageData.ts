@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 import * as path from 'path';
 import puppeteer, { Browser, Page } from 'puppeteer';
-import DataService, { DATE_FORMAT_STR } from './src/lib/DataService';
+import DBService, { DATE_FORMAT_STR } from './src/lib/DBService';
 import { writeFile } from "./src/utils/utils";
 
 const DATA_URL = 'https://data.forexsb.com/data-app';
@@ -17,7 +17,7 @@ const delay = (time) => {
 
 async function scrapeData(symbol) {
     try {
-        await DataService.connect();
+        await DBService.connect();
 
         const browser: Browser = await puppeteer.launch({
             headless: false
@@ -113,7 +113,7 @@ async function scrapeData(symbol) {
 
         console.log(`Done all rows: ${dataRows.length}`);
 
-        const r = await DataService.saveDataRowsToDB(dataRows);
+        const r = await DBService.saveDataRowsToDB(dataRows);
         console.log(`rows saved to DB.`)
 
         await writeFile(SAVE_FILE, { ranAt, dataRows })
