@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import DBService from '../../services/DBService';
+import DataService from '../../services/DataService';
 import TradingView from '../TradingView';
 import './style.scss';
 
@@ -10,7 +10,7 @@ function Page() {
     const [data, setData] = useState(undefined);
 
     const loadData = () => {
-        DBService.loadData().then(data => setData(data));
+        DataService.loadData().then(data => setData(data));
     }
 
     useEffect(() => {

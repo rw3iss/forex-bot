@@ -2,6 +2,6 @@
   "version": 3,
   "sources": ["../src/components/Page/style.scss", "../src/components/App/style.scss"],
   "sourcesContent": [".chart-page {\n    height: 100%;\n    width: 100%;\n    margin: 0;\n    padding: 0;\n    display: flex;\n    flex-direction: column;\n    flex: 1 0 100%;\n}\n\n.tradingview-widget-container {\n    height: 100%;\n    width: 100%;\n    margin: 0;\n    padding: 0;\n    display: flex;\n    flex-direction: column;\n    flex: 1 0 100%;\n}\n\n.tradingview-widget-container > div {\n    height: 100%;\n    width: 100%;\n    margin: 0;\n    padding: 0;\n    display: flex;\n    flex-direction: column;\n    flex: 1 0 100%;\n}\n", "html,\nbody {\n    height: 100%;\n    width: 100%;\n    margin: 0;\n    padding: 0;\n    display: flex;\n    flex-direction: column;\n    flex: 1 0 100%;\n}\n\n#app,\n.app-container {\n    height: 100%;\n    width: 100%;\n    margin: 0;\n    padding: 0;\n    display: flex;\n    flex-direction: column;\n    flex: 1 0 100%;\n}\n"],
-  "mappings": "AAAA,0CACI,YACA,WAFJ,mBAKI,aACA,sBACA,cAaJ,kCACI,YACA,WAtBJ,mBAyBI,aACA,sBACA,cC3BJ,8BAEI,YACA,WAHJ,mBAMI,aACA,sBACA",
+  "mappings": "AAAA,CAAC,WAUD,CAAC,6BATG,OAAQ,KACR,MAAO,KAFX,OAGY,EAHZ,QAIa,EACT,QAAS,KACT,eAAgB,OAChB,KAAM,EAAE,EAAE,IACd,CAYA,CAVC,4BAU6B,CAAE,IAC5B,OAAQ,KACR,MAAO,KAtBX,OAuBY,EAvBZ,QAwBa,EACT,QAAS,KACT,eAAgB,OAChB,KAAM,EAAE,EAAE,IACd,CC5BA,KACA,KAUA,CAAC,IACD,CAAC,cAVG,OAAQ,KACR,MAAO,KAHX,OAIY,EAJZ,QAKa,EACT,QAAS,KACT,eAAgB,OAChB,KAAM,EAAE,EAAE,IACd",
   "names": []
 }

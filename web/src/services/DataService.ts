@@ -1,6 +1,6 @@
 const DATA_URL = 'http://localhost:3333/data';
 
-class DBService {
+class DataService {
 
     public loadData = async () => {
         return new Promise(async (resolve, reject) => {
@@ -17,4 +17,4 @@ class DBService {
 
 }
 
-export default new DBService();
+export default new DataService();
